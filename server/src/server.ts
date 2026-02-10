@@ -7,9 +7,6 @@ import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
 const app = express();
 
-// Add a JSON parser to make POST requests work
-app.use(express.json());
-
 // Middleware logging each request
 app.use(logger);
 
