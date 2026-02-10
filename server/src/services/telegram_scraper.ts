@@ -1,17 +1,19 @@
 import http from "http";
 
-import { telegram_scraper } from "telegram-scraper";
+import { parseTelegramChannel } from "./html-parser";
 import { TELEGRAM_CHANNEL } from "../serverConfig.js";
 
-let telegram_channel = TELEGRAM_CHANNEL;
-
-const tele_server = http.createServer(async (req, res) => {
-  let result = await telegram_scraper(telegram_channel);
-
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.end(result);
+const tele_server = http.createServer(async (_req, res) => {
+  try {
+    const messages = await parseTelegramChannel(TELEGRAM_CHANNEL as string);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.end(JSON.stringify(messages));
+  } catch (error) {
+    res.statusCode = 500;
+    res.end(JSON.stringify({ error: "Failed to retrieve messages." }));
+  }
 });
 
 export default tele_server;
