@@ -1,0 +1,9 @@
+{
+  "name": "parse_my_mess",
+  "version": "1.0.0",
+  "description": "A simple Telegram channel parser that retrieves channel information and the latest post without the need for a Telegram bot.",
+  "scripts": {},
+  "keywords": [],
+  "author": "Mikhail Antonov",
+  "license": "MIT"
+}
