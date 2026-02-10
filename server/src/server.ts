@@ -3,7 +3,7 @@ import express from "express";
 import basicRoutes from "./routes/basic.js";
 
 import logger from "./middleware/logger.js";
-import { notFound } from "./middleware/errorHandler.js";
+import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
 const app = express();
 
@@ -17,6 +17,7 @@ app.use(logger);
 app.use("/", basicRoutes);
 
 // Error handling
+app.use(errorHandler);
 app.use(notFound);
 
 export default app;

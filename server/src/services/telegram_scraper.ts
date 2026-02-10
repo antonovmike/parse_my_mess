@@ -19,8 +19,9 @@ const tele_server = http.createServer(async (_req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.end(formattedMessages(messages));
   } catch (error) {
+    const err = error as Error;
     res.statusCode = 500;
-    res.end(JSON.stringify({ error: "Failed to retrieve messages." }));
+    res.end(JSON.stringify({ error: err.message }));
   }
 });
 
