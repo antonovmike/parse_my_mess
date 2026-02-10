@@ -11,5 +11,8 @@ export async function parseTelegramChannel(
   const result = await telegram_scraper(channel);
   const messages = JSON.parse(result);
 
-  return messages;
+  return messages.map((msg: any) => ({
+    message_text: msg.message_text,
+    datetime: msg.datetime,
+  }));
 }
