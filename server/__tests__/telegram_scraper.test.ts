@@ -17,4 +17,16 @@ describe("tele_server", () => {
     expect(res.text).toContain("Test message");
     expect(res.text).toContain("2026-02-10T07:20:35+00:00");
   });
+
+  test("Should handle errors", async () => {
+    // Mock the parseTelegramChannel to throw an error
+    const { parseTelegramChannel } = require("../src/services/html-parser");
+    parseTelegramChannel.mockImplementationOnce(() =>
+      Promise.reject(new Error("Error")),
+    );
+
+    const res = await request(tele_server).get("/");
+
+    expect(res.statusCode).toBe(500);
+  });
 });
