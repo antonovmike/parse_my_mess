@@ -14,21 +14,11 @@ function errorHandler(
   res: Response,
   _next: NextFunction,
 ) {
-  //   console.error("=== Error Handler ===");
-  //   console.error("Time:", new Date().toISOString());
-  //   console.error("Message:", err.message);
-  //   console.error("Stack:", err.stack);
-  //   console.error("Request URL:", req.originalUrl);
-  //   console.error("Method:", req.method);
-  //   console.error("Headers:", req.headers);
-  //   console.error("Body:", req.body);
-  // Send error response to client
-  //   res.status(err.status || 500).json({
-  //     error: err.message || "Internal server error",
-  //     path: req.originalUrl,
-  //     method: req.method,
-  //   });
+  const statusCode = (err as HttpError).status || 500;
+  const errorMessage = err.message || "Internal Server Error";
+
+  res.status(statusCode).json({ error: errorMessage });
 }
 
-export { notFound };
+export { notFound, errorHandler };
 export type { HttpError };
