@@ -2,10 +2,9 @@ import http from "http";
 
 import { parseTelegramChannel } from "./html-parser";
 import { TELEGRAM_CHANNEL } from "../serverConfig.js";
+import { TelegramMessage } from "../types/telegram";
 
-function formattedMessages(
-  messages: { message_text: string; datetime: string }[],
-): string {
+function formattedMessages(messages: TelegramMessage[]): string {
   return messages
     .map((msg) => `${msg.message_text}\n${msg.datetime}`)
     .join("\n\n");
