@@ -14,10 +14,11 @@ function formattedMessages(
 const tele_server = http.createServer(async (_req, res) => {
   try {
     const messages = await parseTelegramChannel(TELEGRAM_CHANNEL as string);
+
     res.statusCode = 200;
     res.setHeader("Content-Type", "text/plain");
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.end(formattedMessages(messages));
+    res.end(formattedMessages(messages).substring(0, 1000)); // Limit response size
   } catch (error) {
     const err = error as Error;
     res.statusCode = 500;
