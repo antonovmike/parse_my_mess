@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 
+import type { TelegramMessage } from "../types/telegram";
+
 export default function TelegramPage() {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<TelegramMessage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -10,7 +12,7 @@ export default function TelegramPage() {
     const fetchMessages = async () => {
       try {
         const response = await api.get("/tele");
-        setMessages(response.data.split("\n"));
+        setMessages(response.data);
       } catch (error) {
         console.error("Error fetching data from /tele:", error);
         setError("Failed to fetch messages");
@@ -27,7 +29,12 @@ export default function TelegramPage() {
       {loading && <p>Loading messages...</p>}
       {error && <p>Error: {error}</p>}
       {messages.length > 0 ? (
-        messages.map((message, index) => <p key={index}>{message}</p>)
+        messages.map((msg, index) => (
+          <div key={index} className="message">
+            <p>{msg.message_text}</p>
+            <span>{new Date(msg.datetime).toLocaleString()}</span>
+          </div>
+        ))
       ) : (
         <p>No messages to display.</p>
       )}

@@ -2,10 +2,9 @@ import http from "http";
 
 import { parseTelegramChannel } from "./html-parser";
 import { TELEGRAM_CHANNEL } from "../serverConfig.js";
+import { TelegramMessage } from "../types/telegram";
 
-function formattedMessages(
-  messages: { message_text: string; datetime: string }[],
-): string {
+function formattedMessages(messages: TelegramMessage[]): string {
   return messages
     .map((msg) => `${msg.message_text}\n${msg.datetime}`)
     .join("\n\n");
@@ -16,9 +15,9 @@ const tele_server = http.createServer(async (_req, res) => {
     const messages = await parseTelegramChannel(TELEGRAM_CHANNEL as string);
 
     res.statusCode = 200;
-    res.setHeader("Content-Type", "text/plain");
+    res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.end(formattedMessages(messages).substring(0, 1000)); // Limit response size
+    res.end(JSON.stringify(messages));
   } catch (error) {
     const err = error as Error;
     res.statusCode = 500;
