@@ -21,6 +21,7 @@ const tele_server = http.createServer(async (_req, res) => {
   } catch (error) {
     const err = error as Error;
     res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
     res.end(JSON.stringify({ error: err.message }));
   }
 });
