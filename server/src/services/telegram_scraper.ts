@@ -15,9 +15,9 @@ const tele_server = http.createServer(async (_req, res) => {
     const messages = await parseTelegramChannel(TELEGRAM_CHANNEL as string);
 
     res.statusCode = 200;
-    res.setHeader("Content-Type", "text/plain");
+    res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.end(formattedMessages(messages).substring(0, 1000)); // Limit response size
+    res.end(JSON.stringify(messages));
   } catch (error) {
     const err = error as Error;
     res.statusCode = 500;
