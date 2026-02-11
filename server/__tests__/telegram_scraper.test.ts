@@ -28,5 +28,6 @@ describe("tele_server", () => {
     const res = await request(tele_server).get("/");
 
     expect(res.statusCode).toBe(500);
+    expect(res.body).toEqual({ error: "Error" });
   });
 });

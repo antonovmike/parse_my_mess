@@ -1,6 +1,7 @@
 import express from "express";
 
 import basicRoutes from "./routes/basic.js";
+import telegramRoutes from "./routes/telegramRouts.js";
 
 import logger from "./middleware/logger.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
@@ -12,6 +13,7 @@ app.use(logger);
 
 // Connecting routes
 app.use("/", basicRoutes);
+app.use("/", telegramRoutes);
 
 // Error handling
 app.use(errorHandler);
