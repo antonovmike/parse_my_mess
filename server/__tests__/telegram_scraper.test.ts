@@ -22,12 +22,12 @@ describe("tele_server", () => {
     // Mock the parseTelegramChannel to throw an error
     const { parseTelegramChannel } = require("../src/services/html-parser");
     parseTelegramChannel.mockImplementationOnce(() =>
-      Promise.reject(new Error("Error")),
+      Promise.reject(new Error("Error parsing Telegram channel")),
     );
 
     const res = await request(tele_server).get("/");
 
     expect(res.statusCode).toBe(500);
-    expect(res.body).toEqual({ error: "Error" });
+    expect(res.body).toEqual({ error: "Error parsing Telegram channel" });
   });
 });
