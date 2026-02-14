@@ -114,7 +114,6 @@ function App() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between", // push footer to the bottom, distributes content evenly
-                py: 24, // padding‑y
               }}
             >
               <Routes>
