@@ -108,7 +108,15 @@ function App() {
 
           <Box component="main" sx={{ p: 3 }}>
             <Toolbar />
-            <Container>
+            <Container
+              sx={{
+                minHeight: "calc(80vh)", // screen height minus AppBar (64px by default) behaves weirdly, so we use 80vh as a workaround
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between", // push footer to the bottom, distributes content evenly
+                py: 24, // padding‑y
+              }}
+            >
               <Routes>
                 <Route
                   path="/"
