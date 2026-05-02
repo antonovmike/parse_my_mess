@@ -10,6 +10,8 @@ export async function parseTelegramChannel(
 
   return messages.map((msg: any) => ({
     message_text: msg.message_text,
+    message_photo: msg.message_photo,
+    message_video: msg.message_video,
     datetime: msg.datetime,
   }));
 }

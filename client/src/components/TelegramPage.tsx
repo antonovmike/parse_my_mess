@@ -32,6 +32,25 @@ export default function TelegramPage() {
         messages.map((msg, index) => (
           <div key={index} className="message">
             <p>{msg.message_text}</p>
+            {msg.message_photo &&
+              msg.message_photo.map((photo, photoIndex) => (
+                <img
+                  key={photoIndex}
+                  src={photo}
+                  alt={`Фото ${photoIndex + 1}`}
+                />
+              ))}
+            <p></p>
+            {msg.message_video &&
+              msg.message_video.map((video, videoIndex) => (
+                <video
+                  key={`video-${videoIndex}`}
+                  src={video}
+                  controls
+                  style={{ maxWidth: "100%", marginBottom: "10px" }}
+                />
+              ))}
+            <p></p>
             <span>{new Date(msg.datetime).toLocaleString()}</span>
           </div>
         ))
