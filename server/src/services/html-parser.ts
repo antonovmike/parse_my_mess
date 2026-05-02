@@ -1,6 +1,6 @@
 import { telegram_scraper } from "telegram-scraper";
 
-import { TelegramMessage } from "../types/telegram";
+import { TelegramMessage } from "../types/telegram.js";
 
 export async function parseTelegramChannel(
   channel: string,

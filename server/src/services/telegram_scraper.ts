@@ -1,8 +1,8 @@
 import http from "http";
 
-import { parseTelegramChannel } from "./html-parser";
+import { parseTelegramChannel } from "./html-parser.js";
 import { TELEGRAM_CHANNEL } from "../serverConfig.js";
-import { TelegramMessage } from "../types/telegram";
+import { TelegramMessage } from "../types/telegram.js";
 
 function formattedMessages(messages: TelegramMessage[]): string {
   return messages

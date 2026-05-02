@@ -1,6 +1,6 @@
 import express from "express";
 import type { Request, Response } from "express";
-import tele_server from "../services/telegram_scraper";
+import tele_server from "../services/telegram_scraper.js";
 
 const router = express.Router();
 
